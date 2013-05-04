@@ -1,0 +1,7 @@
+<html t:type="layout" title="About pricegrabber"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+
+    <p>(p) 2013 by Roger Stocker for MusiX</p>
+
+</html>

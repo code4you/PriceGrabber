@@ -1,0 +1,54 @@
+<html t:type="layout" title="Price grabber"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+        <!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+
+    <t:beanEditForm t:id="formUrl" object="newItem" submitLabel="Lookup">
+    	<p:sourceUrl>
+	      <t:label for="sourceUrl"/>
+	      <t:textField t:id="sourceUrl" value="newItem.sourceUrl" size="80"/>
+	    </p:sourceUrl>
+    </t:beanEditForm>
+
+    <p>The current time is: <strong>${currentTime}</strong></p>
+
+    <!-- A Zone is a component that can be updated in place, triggered by other components. -->
+    <t:zone t:id="listZone" elementName="div">
+		<t:form t:id="formList">
+			<table border="1" width="100%">
+				<thead>
+					<tr>
+						<th>Lookup date</th><th>Domain</th><th>Item number</th><th>Title</th><th>Price</th>
+					</tr>
+				</thead>
+				<tbody>
+					<t:loop source="grabItems" value="item">
+						<tr>
+							<td><t:output format="literal:dd.MM.yyyy HH:mm" value="lookupDateProperty"/></td>
+							<td>${item.getDomain()}</td>
+							<td><a href="${item.sourceUrl}" target="_">${item.itemNumber}</a></td>
+							<td>${item.title}</td>
+							<td>${item.price}</td>
+							<td><t:actionLink zone="listZone" t:id="lookup" context="item">refresh</t:actionLink></td>
+							<td><t:actionLink zone="listZone" t:id="delete" context="item">delete</t:actionLink></td>
+						</tr>	
+					</t:loop>
+				</tbody>
+			</table>
+		</t:form>		
+    </t:zone>
+
+    <p:sidebar>
+        <p>
+            You are running Tapestry version <strong>${tapestryVersion}</strong>.
+        </p>
+
+        <p>
+            [
+            <t:pagelink page="Index">refresh page</t:pagelink>
+            ]
+        </p>
+    </p:sidebar>
+
+</html>

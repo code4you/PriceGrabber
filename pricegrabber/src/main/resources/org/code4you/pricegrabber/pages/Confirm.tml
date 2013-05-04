@@ -1,0 +1,46 @@
+<html t:type="layout" title="Price grabber"
+      t:sidebarTitle="Framework Version"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+      xmlns:p="tapestry:parameter">
+        <!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+
+	<p><strong>Found the following data:</strong></p>
+	
+	<table>
+		<tr>
+			<td><strong>URL</strong></td><td>${newItem.sourceUrl}</td>
+		</tr>
+		<tr>
+			<td><strong>Lookup date</strong></td><td>${newItem.lookupDate}</td>
+		</tr>
+		<tr>
+			<td><strong>Item number</strong></td><td>${newItem.itemNumber}</td>
+		</tr>
+		<tr>
+			<td><strong>Title</strong></td><td>${newItem.title}</td>
+		</tr>
+		<tr>
+			<td><strong>Price</strong></td><td>${newItem.price}</td>
+		</tr>
+	</table>
+
+	<p>
+		<t:form t:id="confirmForm">
+			<input type="submit" value="Save"/>&nbsp;
+			<t:actionLink t:id="cancel">Discard</t:actionLink>
+		</t:form>
+	</p>
+
+    <p:sidebar>
+        <p>
+            You are running Tapestry version <strong>${tapestryVersion}</strong>.
+        </p>
+
+        <p>
+            [
+            <t:pagelink page="Confirm">refresh page</t:pagelink>
+            ]
+        </p>
+    </p:sidebar>
+
+</html>

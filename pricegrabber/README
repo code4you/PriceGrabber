@@ -1,0 +1,20 @@
+PriceGrabber
+------------
+
+Purpose: Extracts price and other product data from websites
+
+Prerequisites:
+- Install Apache Maven and add 'mvn' to PATH or create a symbolic link to /usr/bin
+- Download platform specific OCR library from http://asprise.com/product/ocr/download.php?lang=java
+- Put the native library (either xx.dll, xx.jnilib, or xx.so) to java.library.path (ex. /usr/lib/java)
+
+Selector definitions:
+- for each domain to grad from, add a <domain>.properties file to src/main/resources/selectors
+- have a look on the two existing files. selectors use XPath syntax. the rest should be self-explaining.
+
+Build: from the project root directory run
+> mvn jetty:run
+
+Run: open your browser and navigate to http://localhost:8080/pricegrabber
+
+Disclaimer: this is only for testing purpose, no warranty. If you want to use it in production, buy an Asprise Licence.
