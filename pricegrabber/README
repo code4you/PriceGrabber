@@ -6,7 +6,9 @@ Purpose: Extracts price and other product data from websites
 Prerequisites:
 - Install Apache Maven and add 'mvn' to PATH or create a symbolic link to /usr/bin
 - Download platform specific OCR library from http://asprise.com/product/ocr/download.php?lang=java
-- Put the native library (either xx.dll, xx.jnilib, or xx.so) to java.library.path (ex. /usr/lib/java)
+- Put the native library (either libAspriseOCR.dll, libAspriseOCR.jnilib, or xx.so) to java.library.path (ex. /usr/lib on Linux or /usr/lib/java on OSX)
+  You can always start the app and process a page which is configured to need OCR, and then look at the error page for java.library.path in the section System Properties, to find out where to put the native lib
+  Of course you may also add a JVM parameter like -Djava.library.path=/path/to/libAspriseOCRfolder
 
 Selector definitions:
 - for each domain to grad from, add a <domain>.properties file to src/main/resources/selectors
@@ -18,3 +20,12 @@ Build: from the project root directory run
 Run: open your browser and navigate to http://localhost:8080/pricegrabber
 
 Disclaimer: this is only for testing purpose, no warranty. If you want to use it in production, buy an Asprise Licence.
+
+Limitations / TODO:
+- OCR sometimes fails
+- Only string and float types supported to grab
+- Text containing float next to UTF-8 characters will likely fail when converted to float
+- No check for duplicates
+- Errors are not shown when triggering "refresh" action for an item in the list
+- No internationalization
+- ContentParser class should be split to separate parsing, processing and configuration
