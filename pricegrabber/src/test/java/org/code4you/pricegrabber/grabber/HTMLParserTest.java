@@ -1,4 +1,4 @@
-package org.code4you.pricegrabber.parser;
+package org.code4you.pricegrabber.grabber;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

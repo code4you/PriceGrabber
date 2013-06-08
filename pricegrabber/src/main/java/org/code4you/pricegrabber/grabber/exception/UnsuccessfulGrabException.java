@@ -1,4 +1,4 @@
-package org.code4you.pricegrabber.exception;
+package org.code4you.pricegrabber.grabber.exception;
 
 public class UnsuccessfulGrabException extends Exception {
 

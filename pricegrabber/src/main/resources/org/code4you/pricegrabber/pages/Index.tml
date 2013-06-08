@@ -16,6 +16,7 @@
     <!-- A Zone is a component that can be updated in place, triggered by other components. -->
     <t:zone t:id="listZone" elementName="div">
 		<t:form t:id="formList">
+			<t:errors/>
 			<table border="1" width="100%">
 				<thead>
 					<tr>

@@ -1,9 +1,7 @@
 package org.code4you.pricegrabber.entities;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,11 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
-import org.code4you.pricegrabber.model.Grabbable;
-import org.code4you.pricegrabber.parser.GrabField;
+import org.code4you.pricegrabber.grabber.util.DomainUtil;
 
 @Entity
-public class GrabItem implements Grabbable {
+public class ProductPriceRecord {
 
 	@Id
 	@NonVisual
@@ -26,15 +23,12 @@ public class GrabItem implements Grabbable {
 	private String sourceUrl;
 
 	@NonVisual
-	@GrabField
 	private String itemNumber;
 
 	@NonVisual
-	@GrabField
 	private String title;
 
 	@NonVisual
-	@GrabField
 	private float price;
 
 	@NonVisual
@@ -89,24 +83,17 @@ public class GrabItem implements Grabbable {
 	}
 
 	@Transient
-	@NonVisual
 	public String getDomain() {
-		String result = "Invalid domain";
-		if (sourceUrl != null) {
-			try {
-				URL url = new URL(sourceUrl);
-				result = url.getHost();
-				StringTokenizer tok = new StringTokenizer(result, ".");
-				int c;
-				if ((c = tok.countTokens()) > 2) {
-					for (int i = 0; i < c - 2; i++)
-						tok.nextToken();
-					result = new StringBuilder(tok.nextToken()).append('.').append(tok.nextToken()).toString();
-				}
-			} catch (MalformedURLException e) {
-			}
+		try {
+			return DomainUtil.getDomainName(sourceUrl);
+		} catch (URISyntaxException e) {
+			return "Invalid URL";
 		}
-		return result;
 	}
 
+	@Transient
+	public boolean isPopulatedAndNew() {
+		return id == 0 && sourceUrl != null && !sourceUrl.isEmpty();
+	}
+	
 }

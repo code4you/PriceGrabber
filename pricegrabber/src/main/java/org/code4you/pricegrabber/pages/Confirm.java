@@ -6,7 +6,8 @@ import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.code4you.pricegrabber.entities.GrabItem;
+import org.code4you.pricegrabber.entities.ProductPriceRecord;
+import org.code4you.pricegrabber.grabber.result.GrabResult;
 import org.hibernate.Session;
 
 /**
@@ -21,20 +22,22 @@ public class Confirm {
 
 	@SessionState
 	@Property
-	private GrabItem newItem;
+	private ProductPriceRecord newItem;
 
 	@Inject
 	private Session session;
 
 	@CommitAfter
 	public Object onSuccess() {
-		session.persist(newItem);
-		newItem = new GrabItem();
+		if (newItem != null && newItem.isPopulatedAndNew()) {
+			session.persist(newItem);
+		}
+		newItem = new ProductPriceRecord();
 		return Index.class;
 	}
 
 	public Object onActionFromCancel() {
-		newItem = new GrabItem();
+		newItem = new ProductPriceRecord();
 		return Index.class;
 	}
 
