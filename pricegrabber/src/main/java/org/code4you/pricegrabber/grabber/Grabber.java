@@ -44,13 +44,14 @@ public class Grabber {
 		}
 	}
 
-	private synchronized void setExceptionGrabResult(Exception e) {
-		lastResult = new GrabResult();
-		lastResult.setStatus(Status.EXCEPTION);
-		lastResult.addStatusMessage(e.getMessage());
+	private void setExceptionGrabResult(Exception e) {
+		GrabResult result = new GrabResult();
+		result.setStatus(Status.EXCEPTION);
+		result.addStatusMessage(e.getMessage());
+		lastResult = result;
 	}
 
-	private synchronized void setGrabResult(GrabResult result) {
+	private void setGrabResult(GrabResult result) {
 		this.lastResult = result;
 	}
 
